@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     startupImage: ['/icons/icon-512x512.png'],
   },
   
-  // متادیتا برای آیکون‌ها
+ 
   icons: {
     icon: [
       { url: '/icons/icons8-spy-96.png' },
@@ -70,13 +70,13 @@ export const metadata: Metadata = {
       { url: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
     apple: [
-      { url: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icons/icons8-spy-96.png', sizes: '192x192', type: 'image/png' },
       { url: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
-    shortcut: ['/favicon.ico'],
+
   },
   
-  // متادیتا برای ربات‌ها
+
   robots: {
     index: true,
     follow: true,
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     },
   },
   
-  // متادیتا برای مرورگر
+ 
   colorScheme: 'dark',
   formatDetection: {
     email: false,
@@ -106,13 +106,13 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <head>
-        {/* لینک‌های اضافی برای آیکون‌ها */}
+ 
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="جاسوس" />
         
-        {/* متا تگ‌های اضافی */}
+     
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
         <meta name="msapplication-TileColor" content="#1e1b4b" />

@@ -9,34 +9,34 @@ export default function HomePage() {
   const [spies, setSpies] = useState(2);
 
   const startGame = () => {
-    // ذخیره تنظیمات در localStorage
+   
     localStorage.setItem('gameSettings', JSON.stringify({
       citizens,
       spies,
       totalPlayers: citizens + spies
     }));
     
-    // رفتن به صفحه بازی
+
     router.push('/game');
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-stone-800 to-zinc-900 flex items-center justify-center">
       <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 w-96 border border-amber-500/20 shadow-2xl">
-        {/* هدر */}
+  
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-amber-400 mb-2">🕵️ شهروند و جاسوس</h1>
           <p className="text-stone-400">تنظیمات بازی رو انتخاب کن</p>
         </div>
 
-        {/* نمایش مجموع بازیکنان */}
+ 
         <div className="bg-amber-500/10 rounded-lg p-3 mb-6 text-center border border-amber-500/30">
           <span className="text-amber-400 font-semibold">تعداد کل بازیکنان: </span>
           <span className="text-white font-bold text-xl">{citizens + spies}</span>
           <span className="text-stone-400 text-sm block mt-1">(شهروندان + جاسوس‌ها)</span>
         </div>
 
-        {/* کنترل شهروندان */}
+   
         <div className="bg-emerald-500/5 rounded-lg p-4 mb-3 border border-emerald-500/30">
           <div className="flex items-center justify-between mb-2">
             <span className="text-emerald-400 flex items-center gap-2">
@@ -74,7 +74,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* کنترل جاسوس‌ها */}
+
         <div className="bg-red-500/5 rounded-lg p-4 mb-6 border border-red-500/30">
           <div className="flex items-center justify-between mb-2">
             <span className="text-red-400 flex items-center gap-2">
@@ -112,7 +112,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* دکمه شروع بازی */}
+      
         <button
           onClick={startGame}
           className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-xl font-bold text-xl hover:from-amber-700 hover:to-orange-700 transition-all transform hover:scale-105 shadow-lg"
@@ -120,7 +120,7 @@ export default function HomePage() {
           🎮 شروع بازی
         </button>
 
-        {/* راهنما */}
+
         <div className="mt-6 text-xs text-stone-500 text-center space-y-1">
           <p>📌 بعد از شروع، هر بازیکن صفحه رو کلیک می‌کنه تا نقششو ببینه</p>
         </div>

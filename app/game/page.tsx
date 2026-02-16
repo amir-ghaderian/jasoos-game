@@ -27,7 +27,7 @@ export default function GamePage() {
     const total = parsed.totalPlayers;
     const spyCount = parsed.spies;
     
-    // انتخاب کلمه مخفی
+  
     setSecretWord(getRandomWord());
     
     // تعیین موقعیت جاسوس‌ها
@@ -77,10 +77,9 @@ export default function GamePage() {
   };
 
   const startMainGame = () => {
-    // اینجا می‌تونی به صفحه اصلی بازی بری
+  
     alert(`بازی شروع شد! کلمه مخفی: ${secretWord}`);
-    // یا می‌تونی به یه صفحه دیگه هدایت کنی
-    // router.push('/main-game');
+  
   };
 
   const isSpy = spyPositions.includes(currentPlayer);
@@ -88,10 +87,10 @@ export default function GamePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-stone-800 to-zinc-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* کارت اصلی */}
+ 
         <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-amber-500/20 shadow-2xl">
           
-          {/* هدر با اسم بازیکن */}
+
           <div className="text-center mb-4">
             <h1 className="text-3xl font-bold text-amber-400 mb-2">
               {showReverse ? reversePersianName(players[currentPlayer]) : players[currentPlayer]}
@@ -101,10 +100,10 @@ export default function GamePage() {
             </div>
           </div>
 
-          {/* کارت نقش */}
+      
           <div className="mb-6">
             {!revealed ? (
-              /* پشت کارت */
+           
               <div 
                 onClick={revealRole}
                 className="bg-gradient-to-br from-amber-900/50 to-stone-800/50 border-2 border-amber-500/50 rounded-xl p-8 text-center cursor-pointer hover:scale-105 transition-transform"
@@ -114,14 +113,14 @@ export default function GamePage() {
                 <div className="text-stone-500 text-sm mt-2">فقط خودت نگاه کن!</div>
               </div>
             ) : (
-              /* روی کارت - نمایش نقش */
+        
               <div className={`rounded-xl p-6 text-center border-2 ${
                 isSpy 
                   ? 'bg-gradient-to-br from-red-900/90 to-red-800/90 border-red-500' 
                   : 'bg-gradient-to-br from-emerald-900/90 to-emerald-800/90 border-emerald-500'
               }`}>
                 {isSpy ? (
-                  /* نمایش برای جاسوس */
+                 
                   <>
                     <div className="text-7xl mb-3">🕵️</div>
                     <div className="text-3xl font-bold text-red-400 mb-3">
@@ -135,7 +134,7 @@ export default function GamePage() {
                     </div>
                   </>
                 ) : (
-                  /* نمایش برای شهروند */
+             
                   <>
                     <div className="text-7xl mb-3">👨‍🌾</div>
                     <div className="text-3xl font-bold text-emerald-400 mb-3">
@@ -154,7 +153,7 @@ export default function GamePage() {
             )}
           </div>
 
-          {/* دکمه برعکس کردن اسم */}
+      
           {revealed && (
             <button
               onClick={toggleReverseName}
@@ -164,7 +163,7 @@ export default function GamePage() {
             </button>
           )}
 
-          {/* دکمه نفر بعدی یا شروع بازی */}
+      
           {revealed && (
             <button
               onClick={currentPlayer < players.length - 1 ? nextPlayer : startMainGame}
@@ -174,14 +173,14 @@ export default function GamePage() {
             </button>
           )}
 
-          {/* راهنما */}
+      
           {!revealed && (
             <p className="text-center text-stone-400">
               روی کارت کلیک کن تا نقش خودتو ببینی
             </p>
           )}
 
-          {/* نوار پیشرفت */}
+       
           <div className="mt-6">
             <div className="w-full bg-stone-800 rounded-full h-2.5">
               <div 
@@ -191,7 +190,7 @@ export default function GamePage() {
             </div>
           </div>
 
-          {/* دکمه تنظیمات مجدد */}
+        
           <button
             onClick={resetGame}
             className="w-full mt-4 py-3 text-stone-400 hover:text-amber-400 transition-colors"
