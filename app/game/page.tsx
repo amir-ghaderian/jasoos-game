@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { getRandomWord } from '../data/words';
 
 export default function GamePage() {
   const router = useRouter();
@@ -10,6 +11,7 @@ export default function GamePage() {
   const [revealed, setRevealed] = useState(false);
   const [gameSettings, setGameSettings] = useState({ citizens: 0, spies: 0, totalPlayers: 0 });
   const [spyPositions, setSpyPositions] = useState<number[]>([]);
+  const [secretWord, setSecretWord] = useState('');
   const [showReverse, setShowReverse] = useState(false);
 
   useEffect(() => {
@@ -25,6 +27,10 @@ export default function GamePage() {
     const total = parsed.totalPlayers;
     const spyCount = parsed.spies;
     
+    // انتخاب کلمه مخفی
+    setSecretWord(getRandomWord());
+    
+    // تعیین موقعیت جاسوس‌ها
     const positions: number[] = [];
     while (positions.length < spyCount) {
       const pos = Math.floor(Math.random() * total);
@@ -42,8 +48,8 @@ export default function GamePage() {
   const reversePersianName = (name: string) => {
     const match = name.match(/([^\d]+)(\d+)/);
     if (match) {
-      const text = match[1]; // "بازیکن "
-      const number = match[2]; // "۱"
+      const text = match[1];
+      const number = match[2];
       const reversedText = text.split('').reverse().join('');
       return reversedText + number;
     }
@@ -63,15 +69,18 @@ export default function GamePage() {
       setCurrentPlayer(currentPlayer + 1);
       setRevealed(false);
       setShowReverse(false);
-    } else {
-      // آخرین بازیکن - شروع بازی اصلی
-      // اینجا می‌تونی یه صفحه دیگه یا یه پیام اضافه کنی
-      alert('همه نقش خود را دیدند! بازی شروع شود!');
     }
   };
 
   const resetGame = () => {
     router.push('/');
+  };
+
+  const startMainGame = () => {
+    // اینجا می‌تونی به صفحه اصلی بازی بری
+    alert(`بازی شروع شد! کلمه مخفی: ${secretWord}`);
+    // یا می‌تونی به یه صفحه دیگه هدایت کنی
+    // router.push('/main-game');
   };
 
   const isSpy = spyPositions.includes(currentPlayer);
@@ -83,11 +92,11 @@ export default function GamePage() {
         <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-amber-500/20 shadow-2xl">
           
           {/* هدر با اسم بازیکن */}
-          <div className="text-center mb-6">
+          <div className="text-center mb-4">
             <h1 className="text-3xl font-bold text-amber-400 mb-2">
               {showReverse ? reversePersianName(players[currentPlayer]) : players[currentPlayer]}
             </h1>
-            <div className="text-stone-400">
+            <div className="text-stone-400 text-sm">
               بازیکن {currentPlayer + 1} از {players.length}
             </div>
           </div>
@@ -95,7 +104,7 @@ export default function GamePage() {
           {/* کارت نقش */}
           <div className="mb-6">
             {!revealed ? (
-              /* پشت کارت - با کلیک برای دیدن نقش */
+              /* پشت کارت */
               <div 
                 onClick={revealRole}
                 className="bg-gradient-to-br from-amber-900/50 to-stone-800/50 border-2 border-amber-500/50 rounded-xl p-8 text-center cursor-pointer hover:scale-105 transition-transform"
@@ -106,25 +115,46 @@ export default function GamePage() {
               </div>
             ) : (
               /* روی کارت - نمایش نقش */
-              <div className={`rounded-xl p-8 text-center border-2 ${
+              <div className={`rounded-xl p-6 text-center border-2 ${
                 isSpy 
                   ? 'bg-gradient-to-br from-red-900/90 to-red-800/90 border-red-500' 
                   : 'bg-gradient-to-br from-emerald-900/90 to-emerald-800/90 border-emerald-500'
               }`}>
-                <div className="text-7xl mb-4">{isSpy ? '🕵️' : '👨‍🌾'}</div>
-                <div className={`text-4xl font-bold mb-2 ${isSpy ? 'text-red-400' : 'text-emerald-400'}`}>
-                  {isSpy ? 'جاسوس' : 'شهروند'}
-                </div>
-                {isSpy && (
-                  <div className="text-red-300 text-sm">
-                    تو جاسوسی! بقیه رو گول بزن!
-                  </div>
+                {isSpy ? (
+                  /* نمایش برای جاسوس */
+                  <>
+                    <div className="text-7xl mb-3">🕵️</div>
+                    <div className="text-3xl font-bold text-red-400 mb-3">
+                      جاسوس
+                    </div>
+                    <div className="bg-black/30 rounded-lg p-4">
+                      <p className="text-red-300 text-sm mb-2">تو جاسوسی!</p>
+                      <p className="text-stone-300 text-sm">
+                        کلمه رو نمی‌دونی! باید با بقیه بازیکنا صحبت کنی و بفهمی کلمه چیه
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  /* نمایش برای شهروند */
+                  <>
+                    <div className="text-7xl mb-3">👨‍🌾</div>
+                    <div className="text-3xl font-bold text-emerald-400 mb-3">
+                      شهروند
+                    </div>
+                    <div className="bg-black/30 rounded-lg p-4">
+                      <p className="text-emerald-300 text-sm mb-2">کلمه امروز:</p>
+                      <p className="text-4xl font-bold text-white mb-2">{secretWord}</p>
+                      <p className="text-stone-300 text-sm">
+                        با بقیه شهروندا درباره این کلمه صحبت کن و جاسوس رو پیدا کن!
+                      </p>
+                    </div>
+                  </>
                 )}
               </div>
             )}
           </div>
 
-          {/* دکمه برعکس کردن اسم - فقط بعد از دیدن نقش */}
+          {/* دکمه برعکس کردن اسم */}
           {revealed && (
             <button
               onClick={toggleReverseName}
@@ -134,17 +164,17 @@ export default function GamePage() {
             </button>
           )}
 
-          {/* دکمه نفر بعدی - فقط بعد از دیدن نقش */}
+          {/* دکمه نفر بعدی یا شروع بازی */}
           {revealed && (
             <button
-              onClick={nextPlayer}
+              onClick={currentPlayer < players.length - 1 ? nextPlayer : startMainGame}
               className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-xl font-bold text-lg hover:from-amber-700 hover:to-orange-700 transition-all shadow-lg"
             >
               {currentPlayer < players.length - 1 ? '👉 نفر بعدی' : '🎯 شروع بازی اصلی'}
             </button>
           )}
 
-          {/* راهنما وقتی نقش دیده نشده */}
+          {/* راهنما */}
           {!revealed && (
             <p className="text-center text-stone-400">
               روی کارت کلیک کن تا نقش خودتو ببینی
