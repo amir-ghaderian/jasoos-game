@@ -60,9 +60,7 @@ export default function GamePage() {
     setRevealed(true);
   };
 
-  const toggleReverseName = () => {
-    setShowReverse(!showReverse);
-  };
+  
 
   const nextPlayer = () => {
     if (currentPlayer < players.length - 1) {
@@ -78,7 +76,7 @@ export default function GamePage() {
 
   const startMainGame = () => {
   
-    alert(`بازی شروع شد! کلمه مخفی: ${secretWord}`);
+    alert(`بازی شروع شد!  `);
   
   };
 
@@ -154,14 +152,6 @@ export default function GamePage() {
           </div>
 
       
-          {revealed && (
-            <button
-              onClick={toggleReverseName}
-              className="w-full mb-3 py-3 bg-purple-600/30 hover:bg-purple-600/50 text-white rounded-xl font-semibold transition-all border border-purple-400/30"
-            >
-              {showReverse ? '👁️ نمایش اسم' : '🔄 مخفی کردن اسم'}
-            </button>
-          )}
 
       
           {revealed && (
