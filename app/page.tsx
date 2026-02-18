@@ -25,7 +25,7 @@ export default function HomePage() {
       <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 w-96 border border-amber-500/20 shadow-2xl">
   
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-amber-400 mb-2">🕵️ شهروند و جاسوس</h1>
+          <h1 className="text-4xl font-bold text-amber-400 mb-2">🕵️   جاسوس</h1>
           <p className="text-stone-400">تنظیمات بازی رو انتخاب کن</p>
         </div>
 
