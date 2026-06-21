@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+import './globals.css';
+import localFont from 'next/font/local';
+
 
 export const viewport: Viewport = {
   themeColor: '#1e1b4b',
@@ -10,7 +10,12 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
 };
-
+const myPersianFont = localFont({
+  src: '../public/fonts/Vazirmatn-Black.woff2',
+  display: 'swap', 
+ 
+  variable: '--font-persian',
+});
 export const metadata: Metadata = {
   title: 'جاسوس',
   description: 'بازی گروهی جاسوس - شناسایی جاسوس در بین شهروندان',
@@ -104,9 +109,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa" dir="rtl">
+    <html lang="fa" dir="rtl" className={myPersianFont.className}>
       <head>
- 
+      <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -118,7 +123,7 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#1e1b4b" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
-      <body className={`${inter.className} bg-gradient-to-br from-slate-900 via-stone-800 to-zinc-900 min-h-screen`}>
+      <body className={`bg-gradient-to-br from-slate-900 via-stone-800 to-zinc-900 min-h-screen`}>
         {children}
       </body>
     </html>
