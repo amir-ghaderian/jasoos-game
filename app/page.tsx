@@ -21,8 +21,8 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-stone-800 to-zinc-900 flex items-center justify-center">
-      <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 w-96 border border-amber-500/20 shadow-2xl">
+    <div className="min-h-screen flex items-center justify-center bg-[var(--background)] text-[var(--foreground)]">
+      <div className=" bg-[var(--card-bg)] border border-[var(--border-color)] rounded-2xl p-8 w-96">
   
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-amber-400 mb-2">🕵️   جاسوس</h1>

@@ -1,5 +1,6 @@
-import type { Metadata, Viewport } from 'next';
 
+import type { Metadata, Viewport } from 'next';
+import { ThemeProvider } from 'next-themes';
 import './globals.css';
 import localFont from 'next/font/local';
 
@@ -12,8 +13,8 @@ export const viewport: Viewport = {
 };
 const myPersianFont = localFont({
   src: '../public/fonts/Vazirmatn-Black.woff2',
-  display: 'swap', 
- 
+  display: 'swap',
+
   variable: '--font-persian',
 });
 export const metadata: Metadata = {
@@ -26,10 +27,10 @@ export const metadata: Metadata = {
   referrer: 'origin-when-cross-origin',
   creator: 'جاسوس',
   publisher: 'جاسوس',
-  
+
   // متادیتا برای PWA
   manifest: '/manifest.json',
-  
+
   // متادیتا برای SEO
   openGraph: {
     title: 'جاسوس - بازی گروهی',
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     locale: 'fa_IR',
     type: 'website',
   },
-  
+
   // متادیتا برای توییتر
   twitter: {
     card: 'summary_large_image',
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
     images: ['/icons/icon-512x512.png'],
     creator: '@jasoos_game',
   },
-  
+
   // متادیتا برای iOS
   appleWebApp: {
     capable: true,
@@ -64,8 +65,8 @@ export const metadata: Metadata = {
     statusBarStyle: 'black-translucent',
     startupImage: ['/icons/icon-512x512.png'],
   },
-  
- 
+
+
   icons: {
     icon: [
       { url: '/icons/icons8-spy-96.png' },
@@ -80,7 +81,7 @@ export const metadata: Metadata = {
     ],
 
   },
-  
+
 
   robots: {
     index: true,
@@ -93,8 +94,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  
- 
+
+
   colorScheme: 'dark',
   formatDetection: {
     email: false,
@@ -109,22 +110,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa" dir="rtl" className={myPersianFont.className}>
+    <html lang="fa" dir="rtl" suppressHydrationWarning className={myPersianFont.className}>
       <head>
-      <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="جاسوس" />
-        
-     
+
+
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
         <meta name="msapplication-TileColor" content="#1e1b4b" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body className={`bg-gradient-to-br from-slate-900 via-stone-800 to-zinc-900 min-h-screen`}>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
