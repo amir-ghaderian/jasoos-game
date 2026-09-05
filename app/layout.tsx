@@ -12,7 +12,7 @@ const SITE_URL = 'https://jasoos-game-six.vercel.app';
 const SITE_NAME = 'جاسوس';
 const SITE_DESCRIPTION =
   'بازی جاسوس آنلاین و رایگان؛ یک بازی گروهی و دورهمی برای شناسایی جاسوس در میان بازیکنان. بازیکنان را انتخاب کنید و بازی را شروع کنید.';
-  
+
 /* =========================================================
    VIEWPORT
 ========================================================= */
@@ -48,7 +48,10 @@ export const metadata: Metadata = {
   },
 
   description: SITE_DESCRIPTION,
-
+  
+  verification: {
+    google: 'Kz5BCLLKr7CmP-8TrASgYVgf3mK7qjq4voYne5fqbZE',
+  },
   keywords: [
     'بازی جاسوس',
     'بازی جاسوس آنلاین',
@@ -211,7 +214,7 @@ export const metadata: Metadata = {
      COLOR / BROWSER
   ======================================================= */
 
-  
+
 
   formatDetection: {
     email: false,
@@ -294,6 +297,12 @@ export default function RootLayout({
         <meta
           name="msapplication-config"
           content="/browserconfig.xml"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+          }}
         />
       </head>
 
