@@ -1,102 +1,218 @@
 
 import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from 'next-themes';
-import './globals.css';
 import localFont from 'next/font/local';
+import './globals.css';
 
+/* =========================================================
+   SITE CONFIG
+========================================================= */
 
+const SITE_URL = 'https://jasoos-game-six.vercel.app';
+const SITE_NAME = 'جاسوس';
+const SITE_DESCRIPTION =
+  'بازی جاسوس آنلاین و رایگان؛ یک بازی گروهی و دورهمی برای شناسایی جاسوس در میان بازیکنان. بازیکنان را انتخاب کنید و بازی را شروع کنید.';
+  
+/* =========================================================
+   VIEWPORT
+========================================================= */
 export const viewport: Viewport = {
   themeColor: '#1e1b4b',
+  colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
 };
+
+
+
+/* =========================================================
+   FONT
+========================================================= */
+
 const myPersianFont = localFont({
   src: '../public/fonts/Vazirmatn-Black.woff2',
   display: 'swap',
-
   variable: '--font-persian',
 });
+
+/* =========================================================
+   SEO METADATA
+========================================================= */
+
 export const metadata: Metadata = {
-  title: 'جاسوس',
-  description: 'بازی گروهی جاسوس - شناسایی جاسوس در بین شهروندان',
-  applicationName: 'جاسوس',
-  authors: [{ name: 'جاسوس' }],
+  metadataBase: new URL(SITE_URL),
+
+  title: {
+    default: 'بازی جاسوس آنلاین | بازی گروهی جاسوس',
+    template: '%s | بازی جاسوس',
+  },
+
+  description: SITE_DESCRIPTION,
+
+  keywords: [
+    'بازی جاسوس',
+    'بازی جاسوس آنلاین',
+    'بازی جاسوس رایگان',
+    'بازی گروهی',
+    'بازی دورهمی',
+    'بازی مهمانی',
+    'بازی فکری',
+    'جاسوس',
+    'شناسایی جاسوس',
+    'بازی چند نفره',
+  ],
+
+  applicationName: SITE_NAME,
+
+  authors: [
+    {
+      name: SITE_NAME,
+    },
+  ],
+
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+
   generator: 'Next.js',
-  keywords: ['بازی', 'جاسوس', 'شهروند', 'مافیا', 'بازی گروهی', 'بازی دورهمی'],
+
   referrer: 'origin-when-cross-origin',
-  creator: 'جاسوس',
-  publisher: 'جاسوس',
 
-  // متادیتا برای PWA
-  manifest: '/manifest.json',
+  /* =======================================================
+     CANONICAL
+  ======================================================= */
 
-  // متادیتا برای SEO
+  alternates: {
+    canonical: '/',
+  },
+
+  /* =======================================================
+     OPEN GRAPH
+  ======================================================= */
+
   openGraph: {
-    title: 'جاسوس - بازی گروهی',
-    description: 'بازی گروهی جاسوس - شناسایی جاسوس در بین شهروندان',
-    url: 'https://jasoos.vercel.app',
-    siteName: 'جاسوس',
+    type: 'website',
+    locale: 'fa_IR',
+
+    url: SITE_URL,
+
+    siteName: SITE_NAME,
+
+    title: 'بازی جاسوس آنلاین | بازی گروهی جاسوس',
+
+    description: SITE_DESCRIPTION,
+
     images: [
       {
         url: '/icons/icon-512x512.png',
         width: 512,
         height: 512,
-        alt: 'جاسوس - بازی گروهی',
+        alt: 'بازی جاسوس آنلاین',
       },
     ],
-    locale: 'fa_IR',
-    type: 'website',
   },
 
-  // متادیتا برای توییتر
+  /* =======================================================
+     TWITTER / X
+  ======================================================= */
+
   twitter: {
     card: 'summary_large_image',
-    title: 'جاسوس - بازی گروهی',
-    description: 'بازی گروهی جاسوس - شناسایی جاسوس در بین شهروندان',
+
+    title: 'بازی جاسوس آنلاین | بازی گروهی جاسوس',
+
+    description: SITE_DESCRIPTION,
+
     images: ['/icons/icon-512x512.png'],
+
     creator: '@jasoos_game',
   },
 
-  // متادیتا برای iOS
-  appleWebApp: {
-    capable: true,
-    title: 'جاسوس',
-    statusBarStyle: 'black-translucent',
-    startupImage: ['/icons/icon-512x512.png'],
-  },
-
-
-  icons: {
-    icon: [
-      { url: '/icons/icons8-spy-96.png' },
-      { url: '/icons/icon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/icons/icon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/icons/icons8-spy-96.png', sizes: '192x192', type: 'image/png' },
-      { url: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
-    ],
-
-  },
-
+  /* =======================================================
+     ROBOTS
+  ======================================================= */
 
   robots: {
     index: true,
     follow: true,
+
     googleBot: {
       index: true,
       follow: true,
+
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
   },
 
+  /* =======================================================
+     PWA
+  ======================================================= */
 
-  colorScheme: 'dark',
+  manifest: '/manifest.json',
+
+  /* =======================================================
+     ICONS
+  ======================================================= */
+
+  icons: {
+    icon: [
+      {
+        url: '/icons/icons8-spy-96.png',
+      },
+      {
+        url: '/icons/icon-16x16.png',
+        sizes: '16x16',
+        type: 'image/png',
+      },
+      {
+        url: '/icons/icon-32x32.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+      {
+        url: '/icons/icon-192x192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        url: '/icons/icon-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
+
+    apple: [
+      {
+        url: '/icons/icon-192x192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        url: '/icons/icon-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
+  },
+
+  /* =======================================================
+     APPLE WEB APP
+  ======================================================= */
+
+  appleWebApp: {
+    capable: true,
+    title: SITE_NAME,
+    statusBarStyle: 'black-translucent',
+    startupImage: ['/icons/icon-512x512.png'],
+  },
+
+  /* =======================================================
+     COLOR / BROWSER
+  ======================================================= */
+
+  
+
   formatDetection: {
     email: false,
     address: false,
@@ -104,31 +220,93 @@ export const metadata: Metadata = {
   },
 };
 
+
+
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: SITE_NAME,
+  url: SITE_URL,
+  description: SITE_DESCRIPTION,
+  applicationCategory: 'GameApplication',
+  operatingSystem: 'Web Browser',
+  inLanguage: 'fa-IR',
+};
+/* =========================================================
+   ROOT LAYOUT
+========================================================= */
+
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="fa" dir="rtl" suppressHydrationWarning className={myPersianFont.className}>
+    <html
+      lang="fa"
+      dir="rtl"
+      suppressHydrationWarning
+      className={myPersianFont.className}
+    >
       <head>
+        {/* PWA */}
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="جاسوس" />
 
+        {/* Apple */}
+        <link
+          rel="apple-touch-icon"
+          href="/icons/icon-192x192.png"
+        />
 
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
-        <meta name="msapplication-TileColor" content="#1e1b4b" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta
+          name="apple-mobile-web-app-capable"
+          content="yes"
+        />
+
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+
+        <meta
+          name="apple-mobile-web-app-title"
+          content={SITE_NAME}
+        />
+
+        {/* Mobile */}
+        <meta
+          name="mobile-web-app-capable"
+          content="yes"
+        />
+
+        {/* Microsoft */}
+        <meta
+          name="msapplication-TileImage"
+          content="/icons/icon-144x144.png"
+        />
+
+        <meta
+          name="msapplication-TileColor"
+          content="#1e1b4b"
+        />
+
+        <meta
+          name="msapplication-config"
+          content="/browserconfig.xml"
+        />
       </head>
-      <body className={`bg-gradient-to-br from-slate-900 via-stone-800 to-zinc-900 min-h-screen`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+
+      <body className="min-h-screen bg-gradient-to-br from-slate-900 via-stone-800 to-zinc-900">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
           {children}
         </ThemeProvider>
       </body>
     </html>
   );
 }
+
