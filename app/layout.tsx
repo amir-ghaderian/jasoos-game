@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from 'next-themes';
 import localFont from 'next/font/local';
 import './globals.css';
+import InstallGameModal from './components/InstallGameModal';
 
 /* =========================================================
    SITE CONFIG
@@ -383,6 +384,7 @@ export default function RootLayout({
           enableSystem
         >
           {children}
+          <InstallGameModal />
         </ThemeProvider>
 
       </body>
