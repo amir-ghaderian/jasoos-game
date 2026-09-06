@@ -10,20 +10,20 @@ import './globals.css';
 
 const SITE_URL = 'https://jasoos-game-six.vercel.app';
 const SITE_NAME = 'جاسوس';
+
 const SITE_DESCRIPTION =
-  'بازی جاسوس آنلاین و رایگان؛ یک بازی گروهی و دورهمی برای شناسایی جاسوس در میان بازیکنان. بازیکنان را انتخاب کنید و بازی را شروع کنید.';
+  'بازی جاسوس آنلاین و رایگان؛ یک بازی گروهی و دورهمی برای شناسایی جاسوس در میان بازیکنان. بدون نیاز به نصب، روی موبایل و کامپیوتر بازی کنید.';
 
 /* =========================================================
    VIEWPORT
 ========================================================= */
+
 export const viewport: Viewport = {
   themeColor: '#1e1b4b',
   colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,
 };
-
-
 
 /* =========================================================
    FONT
@@ -48,14 +48,29 @@ export const metadata: Metadata = {
   },
 
   description: SITE_DESCRIPTION,
-  
+
   verification: {
     google: 'Kz5BCLLKr7CmP-8TrASgYVgf3mK7qjq4voYne5fqbZE',
   },
+
+  /* =======================================================
+     KEYWORDS
+  ======================================================= */
+
   keywords: [
     'بازی جاسوس',
     'بازی جاسوس آنلاین',
-    'بازی جاسوس رایگان',
+    'بازی جاسوس آنلاین رایگان',
+    'بازی جاسوس تحت وب',
+    'بازی جاسوس برای گوشی',
+    'بازی جاسوس برای موبایل',
+    'بازی جاسوس برای آیفون',
+    'بازی جاسوس برای گوشی آیفون',
+    'بازی جاسوس بدون نصب',
+    'بازی جاسوس چند نفره آنلاین',
+    'بازی جاسوس گروهی',
+    'بازی جاسوس دورهمی',
+    'بازی جاسوس مهمانی',
     'بازی گروهی',
     'بازی دورهمی',
     'بازی مهمانی',
@@ -109,7 +124,7 @@ export const metadata: Metadata = {
         url: '/icons/icon-512x512.png',
         width: 512,
         height: 512,
-        alt: 'بازی جاسوس آنلاین',
+        alt: 'بازی جاسوس آنلاین و گروهی',
       },
     ],
   },
@@ -214,8 +229,6 @@ export const metadata: Metadata = {
      COLOR / BROWSER
   ======================================================= */
 
-
-
   formatDetection: {
     email: false,
     address: false,
@@ -223,19 +236,53 @@ export const metadata: Metadata = {
   },
 };
 
-
-
+/* =========================================================
+   STRUCTURED DATA / JSON-LD
+========================================================= */
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
+
   name: SITE_NAME,
+
   url: SITE_URL,
+
   description: SITE_DESCRIPTION,
+
   applicationCategory: 'GameApplication',
-  operatingSystem: 'Web Browser',
+
+  operatingSystem: [
+    'Web Browser',
+    'iOS',
+    'Android',
+    'Windows',
+    'macOS',
+  ],
+
+  browserRequirements: 'Requires JavaScript',
+
   inLanguage: 'fa-IR',
+
+  isAccessibleForFree: true,
+
+  genre: [
+    'Party Game',
+    'Group Game',
+    'Puzzle Game',
+  ],
+
+  keywords: [
+    'بازی جاسوس',
+    'بازی جاسوس آنلاین',
+    'بازی جاسوس تحت وب',
+    'بازی جاسوس برای موبایل',
+    'بازی جاسوس برای آیفون',
+    'بازی جاسوس بدون نصب',
+    'بازی گروهی جاسوس',
+  ],
 };
+
 /* =========================================================
    ROOT LAYOUT
 ========================================================= */
@@ -253,10 +300,17 @@ export default function RootLayout({
       className={myPersianFont.className}
     >
       <head>
-        {/* PWA */}
+
+        {/* ===================================================
+           PWA
+        =================================================== */}
+
         <link rel="manifest" href="/manifest.json" />
 
-        {/* Apple */}
+        {/* ===================================================
+           APPLE
+        =================================================== */}
+
         <link
           rel="apple-touch-icon"
           href="/icons/icon-192x192.png"
@@ -277,13 +331,19 @@ export default function RootLayout({
           content={SITE_NAME}
         />
 
-        {/* Mobile */}
+        {/* ===================================================
+           MOBILE
+        =================================================== */}
+
         <meta
           name="mobile-web-app-capable"
           content="yes"
         />
 
-        {/* Microsoft */}
+        {/* ===================================================
+           MICROSOFT
+        =================================================== */}
+
         <meta
           name="msapplication-TileImage"
           content="/icons/icon-144x144.png"
@@ -298,15 +358,25 @@ export default function RootLayout({
           name="msapplication-config"
           content="/browserconfig.xml"
         />
+
+        {/* ===================================================
+           JSON-LD
+        =================================================== */}
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+            __html: JSON.stringify(jsonLd).replace(
+              /</g,
+              '\\u003c'
+            ),
           }}
         />
+
       </head>
 
       <body className="min-h-screen bg-gradient-to-br from-slate-900 via-stone-800 to-zinc-900">
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -314,6 +384,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+
       </body>
     </html>
   );
