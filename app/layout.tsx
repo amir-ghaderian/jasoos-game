@@ -1,5 +1,6 @@
 
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { ThemeProvider } from 'next-themes';
 import localFont from 'next/font/local';
 import './globals.css';
@@ -14,6 +15,12 @@ const SITE_NAME = 'جاسوس';
 
 const SITE_DESCRIPTION =
   'بازی جاسوس آنلاین و رایگان؛ یک بازی گروهی و دورهمی برای شناسایی جاسوس در میان بازیکنان. بدون نیاز به نصب، روی موبایل و کامپیوتر بازی کنید.';
+
+/* =========================================================
+   GOOGLE ANALYTICS
+========================================================= */
+
+const GA_ID = 'G-PKX5FHQVZC';
 
 /* =========================================================
    VIEWPORT
@@ -53,10 +60,6 @@ export const metadata: Metadata = {
   verification: {
     google: 'Kz5BCLLKr7CmP-8TrASgYVgf3mK7qjq4voYne5fqbZE',
   },
-
-  /* =======================================================
-     KEYWORDS
-  ======================================================= */
 
   keywords: [
     'بازی جاسوس',
@@ -111,9 +114,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'fa_IR',
-
     url: SITE_URL,
-
     siteName: SITE_NAME,
 
     title: 'بازی جاسوس آنلاین | بازی گروهی جاسوس',
@@ -301,6 +302,27 @@ export default function RootLayout({
       className={myPersianFont.className}
     >
       <head>
+
+        {/* ===================================================
+           GOOGLE ANALYTICS 4
+        =================================================== */}
+
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
 
         {/* ===================================================
            PWA
